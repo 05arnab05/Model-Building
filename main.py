@@ -2,7 +2,7 @@ from BlackBoxModels import Random_Forest
 from WhiteboxModels import Lasso
 import pandas as pd
 
-
+MLobjects={}
 
 
 def PreprocessingTS(data):

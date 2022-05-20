@@ -8,7 +8,19 @@ def MinMax(data):
     
     
 #Functions for splitting data  #Take one array of time series in and give out two  
-def TSDataSplit(data):
+def SimpleSplit(data):
+    timestamp = data['timestamp']
+    train =''
+    test= ''
+    return train,test
+
+def TimeSeriesSplit(data):
+    timestamp = data['timestamp']
+    train =''
+    test= ''
+    return train,test
+
+def Kfold(data):
     timestamp = data['timestamp']
     train =''
     test= ''
@@ -17,7 +29,7 @@ def TSDataSplit(data):
 
 #Dict for Data Splitting and Scaling functions
 DataSplittingMethods = {
-    'TSDataSplit': TSDataSplit,
+    'TSDataSplit': Sequence,
 }
 ScalingMethods = {
     'MinMax':MinMax
@@ -28,6 +40,14 @@ ScalingMethods = {
 # Black box abstract class(Blueprint of a black box class)
 class BlackBoxModel(ABC):
 
+    @abstractmethod
+    def DataSplit(self):
+        pass
+    
+    @abstractmethod
+    def Scaling(self):
+        pass
+    
     @abstractmethod
     def ModelTraining(self):
         pass
@@ -46,8 +66,7 @@ class Random_Forest(BlackBoxModel):
     def __init__(self,data,ScalingMethod,SplitMethod):
         #Create the test train split
         self.data=data
-        self.ScalingMethod=ScalingMethod
-        self.SplitMethod=SplitMethod
+        self.ScalingMethod,self.SplitMethod=ScalingMethod,SplitMethod
         self.DataSplits={}
         self.Xlabel,self.Ylabel,self.model
     
@@ -64,8 +83,7 @@ class Random_Forest(BlackBoxModel):
     
     
     def ModelTraining(self,Xlabel,Ylabel):
-        self.Xlabel=Xlabel
-        self.Ylabel=Ylabel
+        self.Xlabel,self.Ylabel=Xlabel,Ylabel
         self.DataSplit()
         Xtrain= self.data.iloc[self.Xlabel]
         Ytrain= self.data.iloc[self.Ylabel]
