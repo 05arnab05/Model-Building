@@ -44,15 +44,17 @@ class Lasso(WhiteBoxModel):
         pass
     
 
+class IAP(WhiteBoxModel): # Alan's testing zone
+    
+    def __init__(self,data,Scaling):
+        self.data= data.PreprocessingTS(data)
+        self.ScaledData= ScalingData(self.data, Scaling)
         
-        
+    def Model(self):
+        pass
     
+    def Predict():
+        pass
     
-
-        
-    
-    
-
-    
-
-    
+    def Plot():
+        pass
