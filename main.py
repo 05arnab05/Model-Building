@@ -1,5 +1,5 @@
 from BlackBoxModels import Random_Forest
-from WhiteboxModels import Lasso
+from WhiteboxModels import LassoModel
 import pandas as pd
 
 MLobjects={}
@@ -17,8 +17,10 @@ def main():
    Concentration= PreprocessingTS(Concentration)
    ob= Random_Forest(Concentration,"MinMax","TSDataSplit")
    ob.ModelTraining("SGP30","Conc")
-   ob.ModelPrediction()
-   
+   ob.ModelPrediction()  
+   ob2= LassoModel(Concentration,"MinMax","TSDataSplit")
+   ob2.ModelTraining("SGP30","Conc")
+   ob2.ModelPrediction()   
    
 
 
