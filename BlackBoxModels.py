@@ -55,6 +55,7 @@ class BlackBoxModel(ABC):
     @abstractmethod
     def ModelPrediction(self):
         pass
+
     
     @abstractmethod
     def PlotResults(self):
